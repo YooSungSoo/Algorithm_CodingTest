@@ -1,23 +1,19 @@
 #include<bits/stdc++.h>
-
 using namespace std;
 
 string s;
 
-
-int main(){
-	
+int main() {
+ 
 	cin >> s;
-	bool c=true;
-	for(int i=0;i<s.length()/2;i++){
-		if(s[i]==s[s.length()-i-1]) {
-		c=true;}
-		else {
-			c = false ;
-			break;
-			}
+	int n = s.size()/2;
+	int rst = 1;
+	
+	for(int i=0;i<n;i++){
+		if(s[i] == s[s.size()- 1 -i]) continue;
+		else rst = 0;
 	}
-	if(c==true) cout << 1;
-	else cout << 0;
-	return 0;
+	
+	cout << rst;
+	return 0;   
 }
