@@ -1,39 +1,26 @@
-#include<bits/stdc++.h> 
+#include <bits/stdc++.h>
+using namespace std;
 
-using namespace std; 
-
-int n,s;
+int n, k;
+int a, b;
 
 int main() {
-	
-	ios::sync_with_stdio(false); 
-    cin.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
 	cin >> n;
-	
-	set<int> m;
+	set<int> s;
 	
 	for(int i=0;i<n;i++){
-		int num;
-		cin >> num;
-		m.insert(num);
+		cin >> k;
+		s.insert(k);
 	}
-	
-	cin >> s;
-	vector<int> y(s);
-	
-	for(int i=0;i<s;i++){
-		int num;
-		cin >> num;
-		y[i] = m.count(num) ? 1 : 0;
+	cin >> a;
+	for(int i=0;i<a;i++){
+		cin >> b;
+		if(s.count(b)==1) cout << 1 << " ";
+		else cout << 0 << " ";
 	}
-	
-	for(int i=0;i<s;i++){
-		cout << y[i] << " ";
-	}
-	
 
-	
-	return 0;
-	
+    return 0;
 }
