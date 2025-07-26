@@ -1,46 +1,59 @@
-#include<bits/stdc++.h>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-int n,d,rst = 1;
-int a[101][101],visited[101][101];
-int dy[4] = {-1,0,1,0};
-int dx[4] = {0,1,0,-1};
+int n, rst;
+int a[104][104];
+int visited[104][104];
 
-void dfs(int y,int x, int d){
-	visited[y][x]=1;
+int dy[] = {1,0,-1,0};
+int dx[] = {0,1,0,-1};
+
+void dfs(int y, int x, int z){
+	
+	visited[y][x] = 1;
 	for(int i=0;i<4;i++){
 		int ny = y + dy[i];
 		int nx = x + dx[i];
-		if(ny < 0 || nx < 0 || ny >= n || nx >= n) continue;
-		if(!visited[ny][nx] && a[ny][nx] > d) dfs(ny,nx,d);
-		}
-		return;
+		if(ny < 0 || ny >= n || nx < 0 || nx >= n ) continue;
+		if(visited[ny][nx]== 1 || a[ny][nx] <= z) continue;
+		dfs(ny,nx,z);
+	}
+	return;
 }
+ 
 
-int main(void){
+int main() {
 	
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
 	cin >> n;
+	int m = 0;
 	for(int i=0;i<n;i++){
 		for(int j=0;j<n;j++){
 			cin >> a[i][j];
+			if(a[i][j]>m) m = a[i][j];
 		}
 	}
 	
-	for(int d=1;d<101;d++){
-		fill(&visited[0][0],&visited[0][0] + 101 * 101,0);
-		int cnt=0;
+	
+	for(int k = 0;k <m;k++){
+		memset(visited, 0, sizeof(visited));	
+		int d = 0;
 		for(int i=0;i<n;i++){
 			for(int j=0;j<n;j++){
-				if(a[i][j] > d && !visited[i][j]){
-				dfs(i,j,d);
-				cnt++;
+				if (a[i][j] > k && visited[i][j] == 0) {
+                    dfs(i, j, k);
+					d++;
 				}
 			}
 		}
-		rst = max(rst,cnt);
+		if(d>rst) rst = d;
 	}
-	cout << rst ;
-
-	return 0;
+	
+	
+	cout << rst;
+	
+	
+    return 0;
 }
